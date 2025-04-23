@@ -58,6 +58,12 @@ def get_spokane_weather_df():
     weather_df = get_weather_data_from_json(weather_json_obj)
     return weather_df
 
+# This function completely removes the
+# undesired column
+def drop_column(df, column):
+    df.drop(columns=column, inplace=True)
+    return df
+
 # This function completely removes
 # empty columns
 def drop_empty_columns(df):
