@@ -37,8 +37,8 @@ def get_weather_data_from_json(json_obj):
 # on other values
 def fill_missing_values(df):
     df.interpolate(method="linear", limit_direction="forward", axis="columns", inplace=True)
-    df.bfill(inplace=True) # Fill first value if missing
-    df.ffill(inplace=True) # Fill last value if missing
+    # df.bfill(inplace=True) # Fill first value if missing
+    # df.ffill(inplace=True) # Fill last value if missing
     return df
 
 # This function combines some of the functions above
@@ -58,14 +58,20 @@ def get_spokane_weather_df():
     weather_df = get_weather_data_from_json(weather_json_obj)
     return weather_df
 
-# This function completely removes the
-# undesired column
-def drop_column(df, column):
-    df.drop(columns=column, inplace=True)
+# This function completely removes
+# empty columns
+def drop_empty_columns(df):
+    df.dropna(axis=1,how="all", inplace=True)
     return df
 
-# This function completely removes
-# empty rows
-def drop_empty_rows(df):
-    df.dropna(inplace=True)
+# This function drops rows from the given
+# starting index to given ending index
+def drop_rows_by_starting_index(df, starting_index, ending_index):
+    df.drop(df.index[starting_index:ending_index], inplace=True)
+    return df
+
+# This function slices and removes string elements
+# from each column element in the given df's column
+def remove_string_ends(df, column, starting_index):
+    df[column] = df[column].str.slice_replace(start=starting_index)
     return df
