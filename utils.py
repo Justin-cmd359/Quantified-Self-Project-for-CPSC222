@@ -36,9 +36,9 @@ def get_weather_data_from_json(json_obj):
 # This function fills in missing values based 
 # on other values
 def fill_missing_values(df):
-    df.interpolate(method="linear", limit_direction="forward", axis="columns", inplace=True)
-    # df.bfill(inplace=True) # Fill first value if missing
-    # df.ffill(inplace=True) # Fill last value if missing
+    df.interpolate(method="linear", inplace=True)
+    df.bfill(inplace=True) # Fill first value if missing
+    df.ffill(inplace=True) # Fill last value if missing
     return df
 
 # This function combines some of the functions above
