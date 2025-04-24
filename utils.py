@@ -85,13 +85,14 @@ def remove_string_ends(df, column, starting_index):
 # This functions decodes overall sleep scores
 # by using the pandas mask function
 def decode_sleep_scores(df):
-    # df["overall_score"] = df["overall_score"].mask(df["overall_score"] >= 90, "Excellent")
-    # df["overall_score"] = df["overall_score"].mask(80 <= df["overall_score"] < 90, "Good")
-    # df["overall_score"] = df["overall_score"].mask(60 <= df["overall_score"] < 80, "Fair")
-    # df["overall_score"] = df["overall_score"].mask(df["overall_score"] < 60, "Poor")
+    list_ex = range(90, 101)
+    list_good = range(80, 90)
+    list_fair = range(60, 80)
+    list_poor = range(0, 60)
 
-    df["overall_score"] = df["overall_score"].mask(df["overall_score"] >= 90, "Excellent")
-    df["overall_score"] = np.where(df["overall_score"].between(80, 89), "Good", df["overall_score"])
-    df["overall_score"] = np.where(df["overall_score"].between(60, 79), "Fair", df["overall_score"])
-    df["overall_score"] = df["overall_score"].mask(df["overall_score"] < 60, "Poor")
+    df.replace({"overall_score": list_ex}, "Excellent", inplace=True)
+    df.replace({"overall_score": list_good}, "Good", inplace=True)
+    df.replace({"overall_score": list_fair}, "Fair", inplace=True)
+    df.replace({"overall_score": list_poor}, "Poor", inplace=True)
+    
     return df
