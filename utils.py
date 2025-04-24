@@ -81,3 +81,17 @@ def drop_rows_by_starting_index(df, starting_index, ending_index):
 def remove_string_ends(df, column, starting_index):
     df[column] = df[column].str.slice_replace(start=starting_index)
     return df
+
+# This functions decodes overall sleep scores
+# by using the pandas mask function
+def decode_sleep_scores(df):
+    # df["overall_score"] = df["overall_score"].mask(df["overall_score"] >= 90, "Excellent")
+    # df["overall_score"] = df["overall_score"].mask(80 <= df["overall_score"] < 90, "Good")
+    # df["overall_score"] = df["overall_score"].mask(60 <= df["overall_score"] < 80, "Fair")
+    # df["overall_score"] = df["overall_score"].mask(df["overall_score"] < 60, "Poor")
+
+    df["overall_score"] = df["overall_score"].mask(df["overall_score"] >= 90, "Excellent")
+    df["overall_score"] = np.where(df["overall_score"].between(80, 89), "Good", df["overall_score"])
+    df["overall_score"] = np.where(df["overall_score"].between(60, 79), "Fair", df["overall_score"])
+    df["overall_score"] = df["overall_score"].mask(df["overall_score"] < 60, "Poor")
+    return df
