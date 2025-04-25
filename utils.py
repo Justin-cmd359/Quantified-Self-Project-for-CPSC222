@@ -97,3 +97,33 @@ def decode_sleep_scores(df):
     df.replace({"overall_score": list_poor}, "Poor", inplace=True)
 
     return df
+
+# This function converts the date column to a 
+# datetime object and extracts the day, month,
+# and year columns
+def create_datetime_columns(df):
+    # The date column is the index
+    df.index = pd.to_datetime(df.index)
+
+    # Need to reformat each column to the front
+    # for easier readability
+    df["day"] = df.index.day
+    day_column = df.pop("day") 
+    df.insert(0, "day", day_column) 
+
+    df['month'] = df.index.month
+    month_column = df.pop("month") 
+    df.insert(0, "month", month_column) 
+
+    df['year'] = df.index.year
+    year_column = df.pop("year") 
+    df.insert(0, "year", year_column) 
+
+    return df
+
+# This function creates a line graph with a
+# given DataFrame, its selected columns,
+# and labels
+def create_line_graph(df, x_column, y_column, x_label, y_label):
+    plt.figure()
+    
