@@ -122,8 +122,16 @@ def create_datetime_columns(df):
     return df
 
 # This function creates a line graph with a
-# given DataFrame, its selected columns,
+# DataFrame's selected columns, title
 # and labels
-def create_line_graph(df, x_column, y_column, x_label, y_label):
-    plt.figure()
-    
+def create_line_graph(x_column, y_column, title, x_label, y_label):
+    plt.figure(figsize=(25, 15))
+    plt.plot(x_column, y_column)
+    plt.xlabel(x_label, fontsize=30)
+    plt.ylabel(y_label, fontsize=30)
+    plt.title(title, fontsize=40)
+    plt.xticks(rotation=45, fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.xlim(pd.Timestamp('2023-08-26'), pd.Timestamp('2025-04-16'))
+    plt.tight_layout()
+    plt.show()
