@@ -83,7 +83,8 @@ def remove_string_ends(df, column, starting_index):
     return df
 
 # This functions decodes overall sleep scores
-# by using the pandas mask function
+# by using the pandas replace function with 
+# lists
 def decode_sleep_scores(df):
     list_ex = range(90, 101)
     list_good = range(80, 90)
@@ -94,5 +95,5 @@ def decode_sleep_scores(df):
     df.replace({"overall_score": list_good}, "Good", inplace=True)
     df.replace({"overall_score": list_fair}, "Fair", inplace=True)
     df.replace({"overall_score": list_poor}, "Poor", inplace=True)
-    
+
     return df
