@@ -135,3 +135,17 @@ def create_line_graph(x_column, y_column, title, x_label, y_label):
     plt.xlim(pd.Timestamp('2023-08-26'), pd.Timestamp('2025-04-16'))
     plt.tight_layout()
     plt.show()
+
+# This function creates a scatter plot with 
+# the given arguments; the goal of it is to 
+# see possible correlations
+def create_scatter_plot(x_pos, y_pos, title, x_label, y_label):
+    plt.figure(figsize=(25, 15))
+    plt.scatter(x_pos, y_pos)
+    plt.xlabel(x_label, fontsize=30)
+    plt.ylabel(y_label, fontsize=30)
+    plt.title(title, fontsize=40)
+    plt.xticks(rotation=45, fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.tight_layout()
+    plt.show()
