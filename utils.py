@@ -45,7 +45,11 @@ def fill_missing_values(df):
 # to create and return a DataFrame of Spokane's
 # weather data from 2023-08-26 to 2025-04-16 
 def get_spokane_weather_df():
+    # NOTE: If you'd like to run this yourself, you'll need your own API token:
+    # Replace "api.get_metoeostat_token()" with:
+    # {"x-rapidapi-key": (token string here)}
     meteo_headers = api.get_metoeostat_token()
+    
     stations_endpt_url = "https://meteostat.p.rapidapi.com/stations/nearby"
     daily_data_endpt_url = "https://meteostat.p.rapidapi.com/stations/daily"
     spokane_lat = str(47.65810637901106)
