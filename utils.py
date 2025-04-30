@@ -134,6 +134,8 @@ def create_line_graph(x_column, y_column, title, x_label, y_label):
     plt.yticks(fontsize=20)
     plt.xlim(pd.Timestamp('2023-08-26'), pd.Timestamp('2025-04-16'))
     plt.tight_layout()
+    title += ".png"
+    plt.savefig(title)
     plt.show()
 
 # This function creates a bar chart with a
